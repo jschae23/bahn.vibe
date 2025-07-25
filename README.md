@@ -189,5 +189,5 @@ This project is licensed under the GNU General Public License v3.0 License - see
 
 ---
 
-**Vibed for German train travelers**
+**Vibed with [v0](https://v0.dev) for German train travelers**
 

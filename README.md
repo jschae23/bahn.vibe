@@ -4,7 +4,9 @@
 
 bahn.vibe is a Next.js application that helps you find the best train prices on Deutsche Bahn by searching multiple days at once. Originally converted from [bahn.sensei](https://github.com/hackgrid/bahn.sensei/) PHP project, it provides a clean, modern interface for comparing train prices across different dates.
 
-![bahn.vibe Screenshot](public/screenshot.png)
+<img width="924" height="769" alt="Screenshot 2025-07-25 at 22 34 09" src="https://github.com/user-attachments/assets/819b0b10-e2a1-43c4-98a9-67d8fa3df28f" />
+<img width="899" height="733" alt="Screenshot 2025-07-25 at 22 34 26" src="https://github.com/user-attachments/assets/e256f1d7-704f-4d77-8e2c-07a4e72ef2e1" />
+
 
 ## ✨ Features
 

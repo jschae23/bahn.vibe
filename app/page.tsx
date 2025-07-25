@@ -28,7 +28,7 @@ export default async function Page({
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
             <a href="/" className="text-blue-600 hover:text-blue-800">
-              bahn.sensei
+              bahn.vibe
             </a>
           </h1>
           <p className="text-gray-600 italic">Findet die günstigste Bahnreise für jeden Tag des Monats.</p>

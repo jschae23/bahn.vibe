@@ -27,7 +27,7 @@ export default async function Page({
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
-            <a href="/" className="text-blue-600 hover:text-blue-800">
+            <a href="/" className="text-pink-600 hover:text-retro-gradient">
               bahn.vibe
             </a>
           </h1>
@@ -44,7 +44,7 @@ export default async function Page({
               <TrainResults searchParams={params} />
             </Suspense>
           ) : (
-            <div className="text-red-600 font-bold">Bitte Start + Ziel befüllen!</div>
+          <></>
           )}
         </section>
       </div>

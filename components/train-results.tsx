@@ -68,9 +68,12 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
 
       try {
         // Get the base URL for API calls
-        const baseUrl =
+        /*const baseUrl =
             process.env.NEXT_PUBLIC_BASE_URL ||
-            (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000")
+            (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000")*/
+
+
+        const baseUrl = "localhost:8080"
 
         const response = await fetch(`${baseUrl}/api/search-prices`, {
           method: "POST",
@@ -147,7 +150,7 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
   if (error) {
     return (
         <div className="text-center py-8">
-          <p className="text-red-600 font-bold">Fehler bei der Bestpreissuche</p>
+          <p className="text-red-600 font-bold">Fehler bei der Bestpreissuche - Backend not responding</p>
           <p className="text-sm text-gray-600 mt-2">{error}</p>
           <p className="text-sm text-gray-500 mt-2">
             Bitte versuchen Sie es später erneut oder überprüfen Sie Ihre Internetverbindung.

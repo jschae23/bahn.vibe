@@ -27,7 +27,7 @@ export default async function Page({searchParams}: {
               bahn.vibe
             </a>
           </h1>
-          <p className="text-gray-600 italic">Finde die günstigste Bahnreise</p>
+          <p className="text-gray-600 italic">Finde die günstigste Bahnreise mit einem Preiskalender</p>
         </header>
 
           <section className="mb-8">

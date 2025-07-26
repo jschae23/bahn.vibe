@@ -85,7 +85,6 @@ export function TrainSearchForm({ searchParams }: TrainSearchFormProps) {
                   onChange={(e) => setStart(e.target.value)}
                   required
               />
-              <p className="text-xs text-gray-500 mt-1">Tipp: Versuchen Sie "München" oder "Berlin"</p>
             </div>
 
             <Button type="button" variant="outline" size="icon" onClick={switchStations} className="mt-6 bg-transparent">
@@ -102,15 +101,13 @@ export function TrainSearchForm({ searchParams }: TrainSearchFormProps) {
                   onChange={(e) => setZiel(e.target.value)}
                   required
               />
-              <p className="text-xs text-gray-500 mt-1">Tipp: Versuchen Sie "Berlin" oder "Hamburg"</p>
             </div>
           </div>
 
           <div>
             <Label htmlFor="abfahrtab">Reisezeitraum ab</Label>
             <Input id="abfahrtab" type="date" value={abfahrtab} onChange={(e) => setAbfahrtab(e.target.value)} />
-            <p className="text-sm text-gray-600 mt-1">Sucht Bestpreise für 3 aufeinanderfolgende Tage ab diesem Datum</p>
-          </div>
+           </div>
 
           <div>
             <Label htmlFor="dayLimit">Anzahl Tage</Label>
@@ -118,7 +115,7 @@ export function TrainSearchForm({ searchParams }: TrainSearchFormProps) {
                 id="dayLimit"
                 type="number"
                 min="1"
-                max="30"
+                max="60"
                 value={dayLimit}
                 onChange={(e) => setDayLimit(e.target.value)}
                 className="w-24 mt-1"
@@ -174,9 +171,6 @@ export function TrainSearchForm({ searchParams }: TrainSearchFormProps) {
             <Button type="button" variant="outline" onClick={handleReset}>
               Zurücksetzen
             </Button>
-            <Button type="button" variant="outline" onClick={() => window.open("/debug", "_blank")}>
-              🐛 Debug
-            </Button>
           </div>
 
           <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded">
@@ -185,9 +179,6 @@ export function TrainSearchForm({ searchParams }: TrainSearchFormProps) {
             <p>
               Verarbeitungszeit: ca. {Math.ceil(Number.parseInt(dayLimit) * 2)}–{Math.ceil(Number.parseInt(dayLimit) * 3)}{" "}
               Sekunden.
-            </p>
-            <p className="text-xs mt-1">
-              📅 Ergebnisse werden in einer interaktiven Kalenderansicht angezeigt. Klicken Sie auf einen Tag zum Buchen!
             </p>
           </div>
         </form>

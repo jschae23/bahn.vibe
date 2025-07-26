@@ -11,8 +11,8 @@
         </linearGradient>
     </defs>
 
-    <!-- Background with rounded corners - off-white -->
-    <rect width="32" height="32" rx="6" ry="6" fill="#f8f8f8"/>
+    <!-- Background with rounded corners - transparent -->
+    <rect width="32" height="32" rx="6" ry="6" fill="none"/>
 
     <!-- Train emoji centered with gradient colors -->
     <text x="16" y="20" font-size="18" text-anchor="middle" dominant-baseline="middle" fill="url(#bgGradient)">🚂</text>

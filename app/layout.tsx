@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'bahn.vibe',
   description: 'Created with v0',
   generator: 'v0.dev',
+    icons: {
+        icon: '/favicon-32x32.png', // /public path
+    },
 }
 
 export default function RootLayout({

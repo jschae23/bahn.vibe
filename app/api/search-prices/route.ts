@@ -5,6 +5,14 @@ interface TrainResult {
   info: string
   abfahrtsZeitpunkt: string
   ankunftsZeitpunkt: string
+  allIntervals?: Array<{
+    preis: number
+    abfahrtsZeitpunkt: string
+    ankunftsZeitpunkt: string
+    abfahrtsOrt: string
+    ankunftsOrt: string
+    info: string
+  }>
 }
 
 interface TrainResults {
@@ -152,6 +160,14 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
     console.log(`Found ${data.intervalle.length} intervals`)
 
     const preise: { [key: string]: number } = {}
+    const allIntervals: Array<{
+      preis: number
+      abfahrtsZeitpunkt: string
+      ankunftsZeitpunkt: string
+      abfahrtsOrt: string
+      ankunftsOrt: string
+      info: string
+    }> = []
     let bestConnection: any = null
 
     // Process intervals exactly like PHP
@@ -185,6 +201,16 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
 
             const info = `${abfahrt} ${connection.abfahrtsOrt} -> ${ankunft} ${connection.ankunftsOrt}`
             preise[info + newPreis] = newPreis
+
+            // Store all intervals for detailed view
+            allIntervals.push({
+              preis: newPreis,
+              abfahrtsZeitpunkt: connection.abfahrtsZeitpunkt,
+              ankunftsZeitpunkt: connection.ankunftsZeitpunkt,
+              abfahrtsOrt: connection.abfahrtsOrt,
+              ankunftsOrt: connection.ankunftsOrt,
+              info: info,
+            })
 
             // Store the connection for the cheapest price
             if (!bestConnection || newPreis < bestConnection.preis) {
@@ -224,6 +250,7 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
         info,
         abfahrtsZeitpunkt: bestConnection?.connection?.abfahrtsZeitpunkt || "",
         ankunftsZeitpunkt: bestConnection?.connection?.ankunftsZeitpunkt || "",
+        allIntervals: allIntervals.sort((a, b) => a.preis - b.preis), // Sort by price
       },
     }
   } catch (error) {

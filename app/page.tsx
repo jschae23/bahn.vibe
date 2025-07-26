@@ -1,7 +1,5 @@
 import { TrainSearchForm } from "@/components/train-search-form"
 import { TrainResults } from "@/components/train-results"
-import { Suspense } from "react"
-import { LoadingSpinner } from "@/components/loading-spinner"
 
 interface SearchParams {
   start?: string
@@ -14,9 +12,7 @@ interface SearchParams {
   dayLimit?: string
 }
 
-export default async function Page({
-  searchParams,
-}: {
+export default async function Page({searchParams}: {
   searchParams: Promise<SearchParams>
 }) {
   const params = await searchParams
@@ -31,23 +27,19 @@ export default async function Page({
               bahn.vibe
             </a>
           </h1>
-          <p className="text-gray-600 italic">Findet die günstigste Bahnreise für jeden Tag des Monats.</p>
+          <p className="text-gray-600 italic">Finde die günstigste Bahnreise</p>
         </header>
 
-        <section className="mb-8">
-          <TrainSearchForm searchParams={params} />
-        </section>
+          <section className="mb-8">
+            <TrainSearchForm searchParams={params} />
+          </section>
 
-        <section className="mb-8">
-          {hasSearch ? (
-            <Suspense fallback={<LoadingSpinner />}>
-              <TrainResults searchParams={params} />
-            </Suspense>
-          ) : (
-          <></>
-          )}
-        </section>
+          <section className="mb-8">
+            {hasSearch ? (
+                <TrainResults searchParams={params} />
+            ) : <></>}
+          </section>
+        </div>
       </div>
-    </div>
   )
 }

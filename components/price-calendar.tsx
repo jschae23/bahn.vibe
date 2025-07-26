@@ -162,24 +162,6 @@ export function PriceCalendar({ results, startStation, zielStation, searchParams
                 </Button>
             </div>
 
-            {/* Price Legend */}
-            <div className="p-4 border-b bg-gray-50">
-                <div className="flex items-center justify-center gap-6 text-sm">
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-green-100 border border-green-200 rounded"></div>
-                        <span className="text-green-600 font-medium">Günstigster: {minPrice}€</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-orange-100 border border-orange-200 rounded"></div>
-                        <span className="text-orange-600">Mittelpreis</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-red-100 border border-red-200 rounded"></div>
-                        <span className="text-red-600 font-medium">Teuerster: {maxPrice}€</span>
-                    </div>
-                </div>
-            </div>
-
             {/* Calendar Grid */}
             <div className="p-4">
                 {/* Weekday Headers */}
@@ -252,13 +234,6 @@ export function PriceCalendar({ results, startStation, zielStation, searchParams
                                                 })}
                                             </div>
                                         )}
-                                    </div>
-                                )}
-
-                                {/* Click indicator for bookable days */}
-                                {hasPrice && priceData.abfahrtsZeitpunkt && startStation && zielStation && (
-                                    <div className="absolute top-1 right-1">
-                                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                                     </div>
                                 )}
                             </div>

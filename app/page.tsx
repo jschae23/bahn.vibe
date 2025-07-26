@@ -1,7 +1,5 @@
 import { TrainSearchForm } from "@/components/train-search-form"
 import { TrainResults } from "@/components/train-results"
-import { Suspense } from "react"
-import { LoadingSpinner } from "@/components/loading-spinner"
 
 interface SearchParams {
   start?: string
@@ -27,27 +25,24 @@ export default async function Page({
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <header className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
-            <a href="/" className="text-blue-600 hover:text-blue-800">
+
+            <a href="/" className="text-gray-600 hover:text-retro-gradient">
               bahn.vibe
             </a>
           </h1>
-          <p className="text-gray-600 italic">Findet die günstigste Bahnreise für jeden Tag des Monats.</p>
+          <p className="text-gray-600 italic">Finde die günstigste Bahnreise mit einem Preiskalender</p>
         </header>
 
         <section className="mb-8">
           <TrainSearchForm searchParams={params} />
         </section>
 
-        <section className="mb-8">
-          {hasSearch ? (
-            <Suspense fallback={<LoadingSpinner />}>
-              <TrainResults searchParams={params} />
-            </Suspense>
-          ) : (
-            <div className="text-red-600 font-bold">Bitte Start + Ziel befüllen!</div>
-          )}
-        </section>
+          <section className="mb-8">
+            {hasSearch ? (
+                <TrainResults searchParams={params} />
+            ) : <></>}
+          </section>
+        </div>
       </div>
-    </div>
   )
 }

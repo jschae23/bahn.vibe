@@ -5,6 +5,14 @@ interface TrainResult {
   info: string
   abfahrtsZeitpunkt: string
   ankunftsZeitpunkt: string
+  allIntervals?: Array<{
+    preis: number
+    abfahrtsZeitpunkt: string
+    ankunftsZeitpunkt: string
+    abfahrtsOrt: string
+    ankunftsOrt: string
+    info: string
+  }>
 }
 
 interface TrainResults {
@@ -152,9 +160,17 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
     console.log(`Found ${data.intervalle.length} intervals`)
 
     const preise: { [key: string]: number } = {}
+    const allIntervals: Array<{
+      preis: number
+      abfahrtsZeitpunkt: string
+      ankunftsZeitpunkt: string
+      abfahrtsOrt: string
+      ankunftsOrt: string
+      info: string
+    }> = []
     let bestConnection: any = null
 
-    // Process intervals exactly like PHP
+    // Process intervals
     for (const iv of data.intervalle) {
       let newPreis = 0
 
@@ -186,6 +202,16 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
             const info = `${abfahrt} ${connection.abfahrtsOrt} -> ${ankunft} ${connection.ankunftsOrt}`
             preise[info + newPreis] = newPreis
 
+            // Store all intervals for detailed view
+            allIntervals.push({
+              preis: newPreis,
+              abfahrtsZeitpunkt: connection.abfahrtsZeitpunkt,
+              ankunftsZeitpunkt: connection.ankunftsZeitpunkt,
+              abfahrtsOrt: connection.abfahrtsOrt,
+              ankunftsOrt: connection.ankunftsOrt,
+              info: info,
+            })
+
             // Store the connection for the cheapest price
             if (!bestConnection || newPreis < bestConnection.preis) {
               bestConnection = {
@@ -211,7 +237,7 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
       }
     }
 
-    // Find the cheapest price (exactly like PHP)
+    // Find the cheapest price
     const minPreis = Math.min(...Object.values(preise))
     const infoKey = Object.keys(preise).find((key) => preise[key] === minPreis)
     const info = infoKey ? infoKey.replace(minPreis.toString(), "") : ""
@@ -224,6 +250,7 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
         info,
         abfahrtsZeitpunkt: bestConnection?.connection?.abfahrtsZeitpunkt || "",
         ankunftsZeitpunkt: bestConnection?.connection?.ankunftsZeitpunkt || "",
+        allIntervals: allIntervals.sort((a, b) => a.preis - b.preis), // Sort by price
       },
     }
   } catch (error) {
@@ -302,7 +329,7 @@ export async function POST(request: NextRequest) {
         console.log(`Day ${currentDate.toISOString().split("T")[0]} result:`, Object.values(dayResult)[0])
       }
 
-      // Add delay to avoid rate limiting (like PHP sleep)
+      // Add delay to avoid rate limiting
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       currentDate.setDate(currentDate.getDate() + 1)

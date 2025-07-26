@@ -1,0 +1,19 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2c003e;stop-opacity:1" />
+            <stop offset="16.67%" style="stop-color:#800080;stop-opacity:1" />
+            <stop offset="33.33%" style="stop-color:#ff0080;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#ff5e00;stop-opacity:1" />
+            <stop offset="66.67%" style="stop-color:#ffcc00;stop-opacity:1" />
+            <stop offset="83.33%" style="stop-color:#ffd6e8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00cfff;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background with rounded corners - transparent -->
+    <rect width="32" height="32" rx="6" ry="6" fill="none"/>
+
+    <!-- Train emoji centered with gradient colors -->
+    <text x="16" y="20" font-size="18" text-anchor="middle" dominant-baseline="middle" fill="url(#bgGradient)">🚂</text>
+</svg>

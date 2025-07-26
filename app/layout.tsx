@@ -4,9 +4,12 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
+  title: 'bahn.vibe',
   description: 'Created with v0',
   generator: 'v0.dev',
+    icons: {
+        icon: '/favicon-32x32.png', // /public path
+    },
 }
 
 export default function RootLayout({

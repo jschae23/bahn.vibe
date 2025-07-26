@@ -6,6 +6,13 @@
   .text-balance {
     text-wrap: balance;
   }
+  .text-retro-gradient {
+    background-image: linear-gradient(to bottom, #2c003e, #800080, #ff0080, #ff5e00, #ffcc00, #ffd6e8, #00cfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 @layer base {

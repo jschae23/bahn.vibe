@@ -67,7 +67,12 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
       const startTime = Date.now()
 
       try {
-        const response = await fetch("/api/search-prices", {
+        // Get the base URL for API calls
+        const baseUrl =
+            process.env.NEXT_PUBLIC_BASE_URL ||
+            (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000")
+
+        const response = await fetch(`${baseUrl}/api/search-prices`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -125,38 +130,38 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
   // Show loading state
   if (loading) {
     return (
-      <div className="space-y-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="font-semibold text-blue-800 mb-2">🔍 Suche läuft...</h3>
-          <p className="text-sm text-blue-600">
-            Durchsuche {searchParams.dayLimit || "3"} Tage für die beste Preise zwischen {searchParams.start} und{" "}
-            {searchParams.ziel}
-          </p>
+        <div className="space-y-4">
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <h3 className="font-semibold text-blue-800 mb-2">🔍 Suche läuft...</h3>
+            <p className="text-sm text-blue-600">
+              Durchsuche {searchParams.dayLimit || "3"} Tage für die beste Preise zwischen {searchParams.start} und{" "}
+              {searchParams.ziel}
+            </p>
+          </div>
+          <LoadingSpinner />
         </div>
-        <LoadingSpinner />
-      </div>
     )
   }
 
   // Show error state
   if (error) {
     return (
-      <div className="text-center py-8">
-        <p className="text-red-600 font-bold">Fehler bei der Bestpreissuche</p>
-        <p className="text-sm text-gray-600 mt-2">{error}</p>
-        <p className="text-sm text-gray-500 mt-2">
-          Bitte versuchen Sie es später erneut oder überprüfen Sie Ihre Internetverbindung.
-        </p>
-        <button
-          onClick={() => {
-            setLastSearchKey("") // Reset to allow retry
-            setError(null)
-          }}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Erneut versuchen
-        </button>
-      </div>
+        <div className="text-center py-8">
+          <p className="text-red-600 font-bold">Fehler bei der Bestpreissuche</p>
+          <p className="text-sm text-gray-600 mt-2">{error}</p>
+          <p className="text-sm text-gray-500 mt-2">
+            Bitte versuchen Sie es später erneut oder überprüfen Sie Ihre Internetverbindung.
+          </p>
+          <button
+              onClick={() => {
+                setLastSearchKey("") // Reset to allow retry
+                setError(null)
+              }}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Erneut versuchen
+          </button>
+        </div>
     )
   }
 
@@ -172,26 +177,26 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
 
   if (!priceResults || Object.keys(priceResults).length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-red-600 font-medium">Keine Bestpreise gefunden</p>
-        <p className="text-gray-600 text-sm mt-2">
-          Bitte überprüfen Sie Ihre Bahnhofsnamen und versuchen Sie es erneut.
-        </p>
-      </div>
+        <div className="text-center py-8">
+          <p className="text-red-600 font-medium">Keine Bestpreise gefunden</p>
+          <p className="text-gray-600 text-sm mt-2">
+            Bitte überprüfen Sie Ihre Bahnhofsnamen und versuchen Sie es erneut.
+          </p>
+        </div>
     )
   }
 
   // Find min and max prices for summary
   const prices = Object.values(priceResults)
-    .map((r) => r.preis)
-    .filter((p) => p > 0)
+      .map((r) => r.preis)
+      .filter((p) => p > 0)
 
   if (prices.length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-orange-600 font-medium">Keine Preise verfügbar</p>
-        <p className="text-gray-600 text-sm mt-2">Für den gewählten Zeitraum sind keine Bestpreise verfügbar.</p>
-      </div>
+        <div className="text-center py-8">
+          <p className="text-orange-600 font-medium">Keine Preise verfügbar</p>
+          <p className="text-gray-600 text-sm mt-2">Für den gewählten Zeitraum sind keine Bestpreise verfügbar.</p>
+        </div>
     )
   }
 
@@ -200,49 +205,49 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
   const avgPrice = Math.round(prices.reduce((a, b) => a + b, 0) / prices.length)
 
   return (
-    <div className="space-y-6">
-      {/* Quick Summary */}
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-blue-800 mb-2">
-          📊 Preisübersicht ({Object.keys(priceResults).length} Tage)
-        </h3>
-        <div className="grid grid-cols-3 gap-4 text-sm">
-          <div className="text-center">
-            <div className="text-green-600 font-bold text-lg">{minPrice}€</div>
-            <div className="text-gray-600">Günstigster</div>
-          </div>
-          <div className="text-center">
-            <div className="text-gray-600 font-bold text-lg">{avgPrice}€</div>
-            <div className="text-gray-600">Durchschnitt</div>
-          </div>
-          <div className="text-center">
-            <div className="text-red-600 font-bold text-lg">{maxPrice}€</div>
-            <div className="text-gray-600">Teuerster</div>
+      <div className="space-y-6">
+        {/* Quick Summary */}
+        <div className="bg-blue-50 p-4 rounded-lg">
+          <h3 className="font-semibold text-blue-800 mb-2">
+            📊 Preisübersicht ({Object.keys(priceResults).length} Tage)
+          </h3>
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div className="text-center">
+              <div className="text-green-600 font-bold text-lg">{minPrice}€</div>
+              <div className="text-gray-600">Günstigster</div>
+            </div>
+            <div className="text-center">
+              <div className="text-gray-600 font-bold text-lg">{avgPrice}€</div>
+              <div className="text-gray-600">Durchschnitt</div>
+            </div>
+            <div className="text-center">
+              <div className="text-red-600 font-bold text-lg">{maxPrice}€</div>
+              <div className="text-gray-600">Teuerster</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Calendar View */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          📅 Preiskalender
-          <span className="text-sm font-normal text-gray-500">(Klicken zum Buchen)</span>
-        </h3>
-        <PriceCalendar
-          results={priceResults}
-          startStation={startStation}
-          zielStation={zielStation}
-          searchParams={{
-            klasse: searchParams.klasse,
-            maximaleUmstiege: searchParams.maximaleUmstiege,
-          }}
-        />
-      </div>
+        {/* Calendar View */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            📅 Preiskalender
+            <span className="text-sm font-normal text-gray-500">(Klicken zum Buchen)</span>
+          </h3>
+          <PriceCalendar
+              results={priceResults}
+              startStation={startStation}
+              zielStation={zielStation}
+              searchParams={{
+                klasse: searchParams.klasse,
+                maximaleUmstiege: searchParams.maximaleUmstiege,
+              }}
+          />
+        </div>
 
-      {/* Processing Info */}
-      <div className="text-center p-3 bg-gray-100 rounded text-sm text-gray-600">
-        ✅ Bestpreissuche abgeschlossen in {executionTime}s • {Object.keys(priceResults).length} Tage durchsucht
+        {/* Processing Info */}
+        <div className="text-center p-3 bg-gray-100 rounded text-sm text-gray-600">
+          ✅ Bestpreissuche abgeschlossen in {executionTime}s • {Object.keys(priceResults).length} Tage durchsucht
+        </div>
       </div>
-    </div>
   )
 }

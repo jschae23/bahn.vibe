@@ -24,7 +24,7 @@ bahn.vibe is a Next.js application that helps you find the best train prices on 
 ### Prerequisites
 
 - Node.js
-- npm or yarn
+- pnpm or yarn
 
 ### Installation
 
@@ -36,12 +36,12 @@ bahn.vibe is a Next.js application that helps you find the best train prices on 
 
 2. **Install dependencies**
    \`\`\`bash
-   npm install
+   pnpm install
    \`\`\`
 
 3. **Run the development server**
    \`\`\`bash
-   npm run dev
+   pnpm run dev
    \`\`\`
 
 4. **Open your browser**

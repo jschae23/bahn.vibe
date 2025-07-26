@@ -170,7 +170,7 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
     }> = []
     let bestConnection: any = null
 
-    // Process intervals exactly like PHP
+    // Process intervals
     for (const iv of data.intervalle) {
       let newPreis = 0
 
@@ -237,7 +237,7 @@ async function getBestPrice(config: any): Promise<TrainResults | null> {
       }
     }
 
-    // Find the cheapest price (exactly like PHP)
+    // Find the cheapest price
     const minPreis = Math.min(...Object.values(preise))
     const infoKey = Object.keys(preise).find((key) => preise[key] === minPreis)
     const info = infoKey ? infoKey.replace(minPreis.toString(), "") : ""
@@ -329,7 +329,7 @@ export async function POST(request: NextRequest) {
         console.log(`Day ${currentDate.toISOString().split("T")[0]} result:`, Object.values(dayResult)[0])
       }
 
-      // Add delay to avoid rate limiting (like PHP sleep)
+      // Add delay to avoid rate limiting
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       currentDate.setDate(currentDate.getDate() + 1)

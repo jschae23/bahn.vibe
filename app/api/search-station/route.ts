@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
 
     const id = data[0].id
 
-    // Parse and normalize the ID string (same logic as PHP)
+    // Parse and normalize the ID string
     const params = new URLSearchParams(id.replace(/@/g, "&"))
     const pValue = params.get("p")
     if (pValue) {

@@ -106,23 +106,10 @@ export async function TrainResults({ searchParams }: TrainResultsProps) {
 
     const minPrice = Math.min(...prices)
     const maxPrice = Math.max(...prices)
-    const avgPrice = Math.round(prices.reduce((a, b) => a + b, 0) / prices.length)
 
     return (
       <div>
         <div className="mb-6 p-4 bg-green-50 rounded-lg">
-          <h3 className="font-semibold text-green-800 mb-2">Bestpreisübersicht ({Object.keys(results).length} Tage)</h3>
-          <div className="grid grid-cols-3 gap-4 text-sm">
-            <div>
-              <span className="text-green-600 font-bold">Günstigster Preis: {minPrice}€</span>
-            </div>
-            <div>
-              <span className="text-gray-600">Durchschnitt: {avgPrice}€</span>
-            </div>
-            <div>
-              <span className="text-red-600 font-bold">Teuerster Preis: {maxPrice}€</span>
-            </div>
-          </div>
           {startStation && zielStation && (
             <div className="text-sm text-gray-600 mt-2">
               Route: {startStation.name} → {zielStation.name}

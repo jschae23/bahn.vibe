@@ -68,12 +68,9 @@ export function TrainResults({ searchParams }: TrainResultsProps) {
 
       try {
         // Get the base URL for API calls
-        /*const baseUrl =
+        const baseUrl =
             process.env.NEXT_PUBLIC_BASE_URL ||
-            (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000")*/
-
-
-        const baseUrl = "localhost:8080"
+            (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000")
 
         const response = await fetch(`${baseUrl}/api/search-prices`, {
           method: "POST",
